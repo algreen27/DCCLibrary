@@ -12,28 +12,42 @@ class App extends Component{
             {title: "Rainbow Six", author: "Tom Clancy"}
         ];
         this.state = {
-            bookNumber: 2
+            bookNumber: 0
         };
     }
 
-goToNextBook = () => {
-    let tempBookNumber = this.state.bookNumberbookNumber;
-    tempBookNumber++;
-    if (tempBookNumber === this.books.length){
-        tempBookNumber = 0;
-    }
-    this.setState({
-        bookNumber: tempBookNumber
-    });
+    goToNextBook = () => {
+        let tempBookNumber = this.state.bookNumber;
+        tempBookNumber++;
+        if (tempBookNumber === this.books.length){
+            tempBookNumber = 0;
+        }
+        this.setState({
+            bookNumber: tempBookNumber
+        });
 }
+    goToPrevBook = () => {
+        let tempBookNumber = this.state.bookNumber;
+        tempBookNumber--;
+        if (tempBookNumber < 0){
+            tempBookNumber = this.books.length - 1;
+        }
+        this.setState({
+            bookNumber: tempBookNumber
+        });
+    }
 
-    render(){
+
+
+
+    render() {
         return  (
             <div className="container-fluid">
                 <TitleBar/>
                 <div className="row">
                     <div className="col-md-4">
                         {/* Buootn here to move to prev book */}
+                        <button onClick={this.goToPrevBook}>Previous Book</button>
                     </div>    
                     <div className="col-md-4">
                         {/* display book with cover */}
