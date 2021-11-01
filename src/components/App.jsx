@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import TitleBar from './TitleBar/TitleBar';
 import BookViewer from './BookViewer/BookViewer';
+import BookCreator from './BookCreator/BookCreator';
 
 
 class App extends Component{
@@ -9,7 +10,7 @@ class App extends Component{
         super(props);
         this.books = [
             {title: "z/OS JCL", author: "Murach"},
-            {title: "Fifth Dscipline", author: "Peter Senge"},
+            {title: "Fifth Discipline", author: "Peter Senge"},
             {title: "Rainbow Six", author: "Tom Clancy"}
         ];
         this.state = {
@@ -38,6 +39,15 @@ class App extends Component{
         });
     }
 
+    createBook = (newBook) => {
+        console.log('From the createNewBook on App component', newBook);
+        this.books.push(newBook);
+        this.setState({
+            bookNumber: this.books.length - 1
+        })
+
+    }
+
 
 
 
@@ -46,6 +56,7 @@ class App extends Component{
             <div className="container-fluid">
                 <TitleBar/>
                 <BookViewer book={this.books[this.state.bookNumber]} nextBook={this.goToNextBook} prevBook={this.goToPrevBook}/>
+                <BookCreator createNewBook={this.createBook}/>
             </div>
         )   
     }
